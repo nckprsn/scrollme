@@ -22,6 +22,7 @@
   ],
   "bugs": "https://github.com/jquery/jquery-color/issues",
   "homepage": "http://scrollme.nckprsn.com/",
+  "demo": "http://scrollme.nckprsn.com/",
   "docs": "http://scrollme.nckprsn.com/",
   "download": "https://github.com/nckprsn/scrollme",
   "dependencies":
