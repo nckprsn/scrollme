@@ -238,7 +238,7 @@
 
 		// Round as required
 
-		switch( 'property' )
+		switch( property )
 		{
 			case 'opacity'    : new_value = new_value.toFixed(2); break;
 			case 'translatex' : new_value = new_value.toFixed(0); break;
