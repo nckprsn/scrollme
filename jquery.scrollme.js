@@ -87,6 +87,15 @@
 				effect.from = effect.element.data( 'from' );
 				effect.to = effect.element.data( 'to' );
 
+				if( effect.element.is( '[data-easing]' ) )
+				{
+					effect.easing = [ effect.element.data( 'easing' ) ];
+				}
+				else
+				{
+					effect.easing = easeout;
+				}
+
 				// Get animated properties
 
 				var properties = {};
@@ -185,7 +194,7 @@
 
 				// Apply easing
 
-				var scroll_eased = easing( scroll_relative );
+				var scroll_eased = effect.easing( scroll_relative );
 
 				// Get new value for each property
 
@@ -244,9 +253,9 @@
 			case 'translatex' : new_value = new_value.toFixed(0); break;
 			case 'translatey' : new_value = new_value.toFixed(0); break;
 			case 'translatez' : new_value = new_value.toFixed(0); break;
-			case 'rotatex'    : new_value = new_value.toFixed(0); break;
-			case 'rotatey'    : new_value = new_value.toFixed(0); break;
-			case 'rotatez'    : new_value = new_value.toFixed(0); break;
+			case 'rotatex'    : new_value = new_value.toFixed(1); break;
+			case 'rotatey'    : new_value = new_value.toFixed(1); break;
+			case 'rotatez'    : new_value = new_value.toFixed(1); break;
 			case 'scale'      : new_value = new_value.toFixed(2); break;
 			default : break;
 		}
@@ -257,9 +266,29 @@
 	}
 
 	// ----------------------------------------------------------------------------------------------------
-	// Easing function (cubic in/out)
+	// Easing functions
 
-	easing = function( x )
+	// Linear
+	linear = function( x )
+	{
+		return x;
+	}
+
+	// Ease out (cubic)
+	easeout = function( x )
+	{
+		return x * x * x;
+	}
+
+	// Ease in (cubic)
+	easein = function( x )
+	{
+		x = 1 - x;
+		return 1 - ( x * x * x );
+	}
+
+	// Ease in/out (cubic)
+	easeinout = function( x )
 	{
 		if( x < 0.5 )
 		{
