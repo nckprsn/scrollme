@@ -1,0 +1,38 @@
+{
+  "name": "scrollme",
+  "description": "A jQuery plugin for adding simple scrolling effects to web pages.",
+  "version": "1.0.4",
+  "main": "jquery.scrollme.min.js",
+  "ignore":
+  [
+    "scrollme.jquery.json"
+  ],
+  "keywords":
+  [
+    "animation",
+    "scrolling"
+  ],
+  "authors":
+  [
+    {
+      "name": "Nick Pearson",
+      "url": "http://nckprsn.com"
+    }
+  ],
+  "license":
+  [
+    {
+      "type": "GPLv3",
+      "url": "http://www.gnu.org/licenses/gpl-3.0.html"
+    }
+  ],
+  "homepage": "http://scrollme.nckprsn.com/",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/nckprsn/scrollme"
+  },
+  "dependencies":
+  {
+    "jquery": ">=1.5"
+  }
+}
