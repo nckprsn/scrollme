@@ -38,6 +38,44 @@
 		'scale' : 1
 	};
 
+	// Easing functions
+
+	var easing_functions =
+	{
+		'linear' :
+			function( x )
+			{
+				return x;
+			},
+
+		'easeout' :
+			function( x )
+			{
+				return x * x * x;
+			},
+
+		'easein' :
+			function( x )
+			{
+				x = 1 - x;
+				return 1 - ( x * x * x );
+			},
+
+		'easeinout' :
+			function( x )
+			{
+				if( x < 0.5 )
+				{
+					return ( 4 * x * x * x );
+				}
+				else
+				{
+					x = 1 - x;
+					return 1 - ( 4 * x * x * x ) ;
+				}
+			}
+	};
+
 	// ----------------------------------------------------------------------------------------------------
 	// Initialisation
 
@@ -89,11 +127,11 @@
 
 				if( effect.element.is( '[data-easing]' ) )
 				{
-					effect.easing = [ effect.element.data( 'easing' ) ];
+					effect.easing = easing_functions[ effect.element.data( 'easing' ) ]
 				}
 				else
 				{
-					effect.easing = easeout;
+					effect.easing = easing_functions[ 'easeout' ];
 				}
 
 				// Get animated properties
@@ -146,13 +184,17 @@
 	{
 		// For each element in viewport
 
-		for( i=0 ; i<elements_in_view.length ; i++ )
+		var elements_in_view_length = elements_in_view.length;
+
+		for( i=0 ; i<elements_in_view_length ; i++ )
 		{
 			var element = elements_in_view[i];
 
 			// For each effect
 
-			for( e=0 ; e<element.effects.length ; e++ )
+			var effects_length = element.effects.length;
+
+			for( e=0 ; e<effects_length ; e++ )
 			{
 				var effect = element.effects[e];
 
@@ -256,49 +298,13 @@
 			case 'rotatex'    : new_value = new_value.toFixed(1); break;
 			case 'rotatey'    : new_value = new_value.toFixed(1); break;
 			case 'rotatez'    : new_value = new_value.toFixed(1); break;
-			case 'scale'      : new_value = new_value.toFixed(2); break;
+			case 'scale'      : new_value = new_value.toFixed(3); break;
 			default : break;
 		}
 
 		// Done
 
 		return new_value;
-	}
-
-	// ----------------------------------------------------------------------------------------------------
-	// Easing functions
-
-	// Linear
-	linear = function( x )
-	{
-		return x;
-	}
-
-	// Ease out (cubic)
-	easeout = function( x )
-	{
-		return x * x * x;
-	}
-
-	// Ease in (cubic)
-	easein = function( x )
-	{
-		x = 1 - x;
-		return 1 - ( x * x * x );
-	}
-
-	// Ease in/out (cubic)
-	easeinout = function( x )
-	{
-		if( x < 0.5 )
-		{
-			return ( 4 * x * x * x );
-		}
-		else
-		{
-			x = 1 - x;
-			return 1 - ( 4 * x * x * x ) ;
-		}
 	}
 
 	// ----------------------------------------------------------------------------------------------------
@@ -317,7 +323,9 @@
 	{
 		elements_in_view = [];
 
-		for( i=0 ; i<elements.length ; i++ )
+		var elements_length = elements.length;
+
+		for( i=0 ; i<elements_length ; i++ )
 		{
 			if ( ( elements[i].top < viewport_bottom ) && ( elements[i].bottom > viewport_top ) )
 			{
@@ -357,7 +365,9 @@
 
 	update_element_heights = function()
 	{
-		for( i=0 ; i<elements.length ; i++ )
+		var elements_length = elements.length;
+
+		for( i=0 ; i<elements_length ; i++ )
 		{
 			var element_height = elements[i].element.outerHeight();
 			var position = elements[i].element.offset();
