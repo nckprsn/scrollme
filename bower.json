@@ -1,7 +1,7 @@
 {
   "name": "scrollme",
   "description": "A jQuery plugin for adding simple scrolling effects to web pages.",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "main": "jquery.scrollme.min.js",
   "ignore":
   [
