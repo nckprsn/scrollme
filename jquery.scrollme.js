@@ -127,9 +127,19 @@
 					var effect = {};
 
 					effect.element = $( this );
+
 					effect.when = effect.element.data( 'when' );
 					effect.from = effect.element.data( 'from' );
 					effect.to = effect.element.data( 'to' );
+
+					if( effect.element.is( '[data-crop]' ) )
+					{
+						effect.crop = effect.element.data( 'crop' );
+					}
+					else
+					{
+						effect.crop = true;
+					}
 
 					if( effect.element.is( '[data-easing]' ) )
 					{
@@ -208,7 +218,8 @@
 
 					switch( effect.when )
 					{
-						case 'view' :
+						case 'view' : // Maintained for backwards compatibility
+						case 'span' :
 							var start = element.top - viewport_height;
 							var end = element.bottom;
 							break;
@@ -224,8 +235,13 @@
 							break;
 					}
 
-					if( start < 0 ) start = 0;
-					if( end > ( body_height - viewport_height ) ) end = body_height - viewport_height;
+					// Crop boundaries
+
+					if( effect.crop )
+					{
+						if( start < 0 ) start = 0;
+						if( end > ( body_height - viewport_height ) ) end = body_height - viewport_height;
+					}
 
 					// Get scroll position of reference selector
 
