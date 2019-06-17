@@ -1,3 +1,5 @@
+**This project may be archived in the not too distant future**
+
 scrollme
 ========
 
